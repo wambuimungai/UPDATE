@@ -1,11 +1,3 @@
-@font-face {
-	font-family: SourceSansPro-Regular;
-	src: url('fonts/SourceSansPro-Regular.otf');
-}
-@font-face {
-	font-family: SourceSansPro-Bold;
-	src: url('fonts/SourceSansPro-Bold.otf');
-}
 body {
 	font-family: SourceSansPro-Regular;
 }

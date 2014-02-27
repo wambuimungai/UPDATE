@@ -3,14 +3,15 @@ if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 
 class Github extends MY_Controller {
+	var $nascop_url = "http://localhost/NASCOP/";
 	function __construct() {
 		parent::__construct();
 		$this -> load -> library('github_updater');
 		$this -> load -> library('Unzip');
 	}
 
-	public function index() {
-
+	public function index($facility = "") {
+		$this -> session -> set_userdata("facility", $facility);
 		$sql = "SELECT hash_value,update_time FROM git_log ORDER BY id desc";
 		$query = $this -> db -> query($sql);
 		$results = $query -> result_array();
@@ -57,6 +58,7 @@ class Github extends MY_Controller {
 			$this -> runSQL();
 			$this -> setLog($original_hash);
 			$this -> set_config_hash($original_hash);
+			$message .= $this -> send_log($original_hash);
 			$this -> session -> set_userdata('msg_success', $message);
 		} else {
 			$message = "No Update Available";
@@ -130,6 +132,28 @@ class Github extends MY_Controller {
 			}
 		}
 		return false;
+	}
+
+	public function send_log($original_hash) {
+		$url = $this -> nascop_url . "sync/gitlog";
+		$facility_code = $this -> session -> userdata("facility");
+		$results = array("facility" => $facility_code, "hash_value" => $original_hash);
+		$json_data = json_encode($results, JSON_PRETTY_PRINT);
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, array('json_data' => $json_data));
+		$json_data = curl_exec($ch);
+		if (empty($json_data)) {
+			$message = "cURL Error: " . curl_error($ch);
+		} else {
+			$messages = json_decode($json_data, TRUE);
+			$message = $messages[0];
+		}
+		curl_close($ch);
+		return $message;
 	}
 
 	public function template($data) {

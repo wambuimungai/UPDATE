@@ -40,6 +40,15 @@ class Github extends MY_Controller {
 		return $update_status;
 	}
 
+	public function checkJsonUpdate() {
+		$update_status = 0;
+		$hasUpdate = $this -> github_updater -> has_update();
+		if ($hasUpdate > 0) {
+			$update_status = 1;
+		}
+		echo json_encode($update_status);
+	}
+
 	public function setLog($hash) {
 		$sql = "INSERT INTO git_log(hash_value) VALUES ('" . $hash . "')";
 		$query = $this -> db -> query($sql);

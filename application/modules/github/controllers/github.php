@@ -3,9 +3,10 @@ if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 
 class Github extends MY_Controller {
-	var $nascop_url = "http://localhost/NASCOP/";
+	var $nascop_url = "http://41.57.109.241/NASCOP/";
 	function __construct() {
 		parent::__construct();
+		ini_set("max_execution_time", "100000");
 		$this -> load -> library('github_updater');
 		$this -> load -> library('Unzip');
 	}

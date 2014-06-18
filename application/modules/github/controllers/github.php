@@ -113,14 +113,17 @@ class Github extends MY_Controller {
 	}
 
 	public function runSQL() {
-		$link = base_url() . 'assets/sql.txt';
-		$link = str_replace("UPDATE", "ADT", $link);
+	    $dir = realpath($_SERVER['DOCUMENT_ROOT']);
+	    $link = $dir . "\\ADT\\assets\sql.txt";
 		$results = file_get_contents($link);
 		if ($results != null) {
 			$results = explode(";", $results);
 			foreach ($results as $i => $result) {
 				if ($result != null) {
+				    $db_debug = $this->db->db_debug;
+					$this->db->db_debug = false;
 					$this -> db -> query($result);
+					$this->db->db_debug = $db_debug;
 				}
 			}
 		}
@@ -144,7 +147,7 @@ class Github extends MY_Controller {
 		return false;
 	}
 
-	public function send_log($original_hash) {
+	public function send_log($original_hash="") {
 		$url = $this -> nascop_url . "sync/gitlog";
 		$facility_code = $this -> session -> userdata("facility");
 		$results = array("facility" => $facility_code, "hash_value" => $original_hash);

@@ -70,7 +70,7 @@ class Github extends MY_Controller {
 			$first_dir = $this -> unzip_update($hash);
 			$this -> copy_files($original_hash);
 			$message = 'Done updating System';
-			$this -> runSQL();
+			//$this -> runSQL();
 			$this -> setLog($original_hash);
 			$this -> set_config_hash($original_hash);
 			$message .= $this -> send_log($original_hash);

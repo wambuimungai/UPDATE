@@ -14,10 +14,7 @@
 | path to your installation.
 |
 */
-//$config['base_url']	= 'http://'.$_SERVER['SERVER_NAME'].'/platform_rb/';
-$proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
-$config['base_url'] = $proto . $_SERVER['SERVER_NAME'] . '/UPDATE/';
-
+$config['base_url'] = 'http://'. $_SERVER['SERVER_NAME'] .':'.$_SERVER['SERVER_PORT']. '/UPDATE/';
 /*
 |--------------------------------------------------------------------------
 | Index File

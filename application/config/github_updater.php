@@ -3,17 +3,17 @@
 /**
  * The user name of the git hub user who owns the repo
  */
-$config['github_user'] = 'NASCOP';
+/*$config['github_user'] = 'NASCOP';
 
 /**
  * The repo on GitHub we will be updating from
  */
-$config['github_repo'] = 'ADT';
+/*$config['github_repo'] = 'ADT';
 
 /**
  * The branch to update from
  */
-$config['github_branch'] = 'master';
+/*$config['github_branch'] = 'master';
 
 /**
  * The current commit the files are on.
@@ -21,7 +21,7 @@ $config['github_branch'] = 'master';
  * NOTE: You should only need to set this initially it will be
  * automatically set by the library after subsequent updates.
  */
-$config['current_commit'] = 'dbfa033e4245b870998db032385ee633f8d47e16';
+/*$config['current_commit'] = 'c51f0debf19a487612606301549de9c203c50754';
 
 /**
  * A list of files or folders to never perform an update on.
@@ -33,10 +33,10 @@ $config['current_commit'] = 'dbfa033e4245b870998db032385ee633f8d47e16';
  * 'application/views/admin/test.php'
  * and any other path with the term 'admin' in it.
  */
-$config['ignored_files'] = array('application/config');
+/*$config['ignored_files'] = array('application/config');
 
 /**
  * Flag to indicate if the downloaded and extracted update files
  * should be removed
  */
-$config['clean_update_files'] = true;
+/*$config['clean_update_files'] = true;

@@ -21,7 +21,9 @@
  * NOTE: You should only need to set this initially it will be
  * automatically set by the library after subsequent updates.
  */
+
 /*$config['current_commit'] = 'c51f0debf19a487612606301549de9c203c50754';
+
 
 /**
  * A list of files or folders to never perform an update on.
